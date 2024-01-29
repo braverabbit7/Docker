@@ -1,13 +1,16 @@
-# Используем базовый образ с Python 3
-FROM python:3
+FROM python:3-alpine
 
 # Установка необходимых библиотек
-RUN pip install Flask psycopg2-binary configparser
-
+RUN apk add --no-cache \
+    build-base \
+    libffi-dev \
+    postgresql-dev \
+    && pip install Flask psycopg2-binary configparser \
+    && apk del build-base libffi-dev
 
 # Создание рабочей директории внутри контейнера
 WORKDIR /srv/app/
 
 
 # Определение команды для запуска приложения (замените на свою)
-CMD ["python3", "web.py"]
+CMD ["python", "web.py"]
