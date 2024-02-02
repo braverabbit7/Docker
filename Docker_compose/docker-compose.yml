@@ -1,23 +1,25 @@
 version: "3.9"
 
 services:
- web:
-  build: .
-  depends_on:
-   - redis
-  networks:
-   - net
-  ports:
-   - "5000:5000"
- redis:
-  image: redis:alpine
-  volumes:
-   - redis-data:/data
-  networks:
-   - net
+  web:
+    build: .
+    depends_on:
+      - redis
+    networks:
+      - net
+    ports:
+      - "5000:5000"
+  redis:
+    image: redis:alpine
+    volumes:
+      - type: volume
+        source: redis-data
+        target: /data
+    networks:
+      - net
 
 networks:
- net:
+  net:
 
 volumes:
- redis-data:
+  redis-data:
