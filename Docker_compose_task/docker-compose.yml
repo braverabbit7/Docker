@@ -15,4 +15,4 @@ services:
     test: ["CMD-SHELL", "curl -sS http://nginx | grep -q 'works'"]
     interval: 5s
     timeout: 5s
-    retries: 5
+    retries: 3
