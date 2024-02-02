@@ -9,10 +9,10 @@ services:
       - "80:80"
   php-web:
     build: .
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sS http://nginx | grep -q 'works'"]
+      interval: 1s
+      timeout: 5s
+      retries: 3
     depends_on:
       - nginx
-  healthcheck:
-    test: ["CMD-SHELL", "curl -sS http://nginx | grep -q 'works'"]
-    interval: 5s
-    timeout: 5s
-    retries: 3
