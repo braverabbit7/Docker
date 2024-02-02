@@ -3,8 +3,9 @@ version: "3.9"
 services:
   nginx:
     image: nginx:alpine
-    # links:
-    #   - "nginx"
+    volumes:
+      - ./www/:/var/www/html
+      - ./nginx/dev.conf:/etc/nginx/conf.d/dev.conf
     ports:
       - "80:80"
   php-web:
